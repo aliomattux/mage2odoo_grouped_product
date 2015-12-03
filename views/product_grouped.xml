@@ -1,0 +1,53 @@
+<openerp>
+    <data>
+	<record id="view_mage_grouped_product" model="ir.ui.view">
+	    <field name="name">Mage Grouped Product Tree</field>
+	    <field name="model">mage.grouped.product</field>
+	    <field name="arch" type="xml">
+		<tree>
+		    <field name="product_tmpl_id" />
+		    <field name="product" />
+		    <field name="qty" />
+		</tree>
+	    </field>
+	</record>
+
+        <record id="view_mage_grouped_product_form" model="ir.ui.view">
+            <field name="name">Mage Grouped Product Form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="mage2odoo.mage_core_configurable_menu" />
+            <field name="arch" type="xml">
+		<page string="Magento" position="after" >
+		    <page string="Grouped Items" attrs="{'invisible': [('mage_type', '!=', 'grouped')]}">
+			<field name="grouped_products" >
+			    <tree string="Products">
+				<field name="product" />
+				<field name="qty" />
+			    </tree>
+			</field>
+		    </page>
+		</page>
+            </field>
+        </record>
+
+        <record id="action_grouped_product" model="ir.actions.act_window">
+            <field name="name">Grouped Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mage.grouped.product</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_mage_grouped_product"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+		Grouped Produts
+              </p><p>
+		Stuff
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_grouped_product" id="menu_grouped_product"
+            parent="stock.menu_stock_product"
+            sequence="5"/>
+    </data>
+</openerp>

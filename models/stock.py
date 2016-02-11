@@ -69,9 +69,9 @@ class StockMove(osv.osv):
                         'picking_id': move.picking_id.id if move.picking_id else False,
                         'product_id': product.id,
                         'product_uom': product.uom_id.id,
-                        'product_uom_qty': component.qty,
+                        'product_uom_qty': component.qty * move.product_uom_qty,
                         'product_uos': product.uom_id.id,
-                        'product_uos_qty': component.qty,
+                        'product_uos_qty': component.qty * move.product_uom_qty,
                         'state': 'draft',  #will be confirmed below
                         'name': product.name,
                         'procurement_id': move.procurement_id.id,
